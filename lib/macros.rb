@@ -193,7 +193,30 @@ module Validatable
     def validates_true_for(*args)
       add_validations(args, ValidatesTrueFor)
     end
-    
+
+    # call-seq: validates_associated(*args)
+    #
+    # Checks the validity of an associated object or objects and adds a single
+    # error if validation fails.
+    #
+    #   class Person
+    #     include Validatable
+    #     attr_accessor :addresses
+    #     validates_associated :addresses
+    #   end
+    #
+    # Configuration options:
+    #
+    #     * after_validate - A block that executes following the run of a validation
+    #     * message - The message to add to the errors collection when the validation fails
+    #     * times - The number of times the validation applies
+    #     * level - The level at which the validation should occur
+    #     * if - A block that when executed must return true of the validation will not occur
+    #     * group - The group that this validation belongs to.  A validation can belong to multiple groups
+    def validates_associated(*args)
+      add_validations(args, ValidatesAssociated)
+    end
+
     # call-seq: include_validations_from(attribute)
     # 
     # Includes all the validations that are defined on the attribute.
