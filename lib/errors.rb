@@ -28,6 +28,8 @@ module Validatable
       return nil if errors[attribute.to_sym].nil?
       errors[attribute.to_sym].size == 1 ? errors[attribute.to_sym].first : errors[attribute.to_sym]
     end
+    
+    alias [] on
 
     def add(attribute, message) #:nodoc:
       errors[attribute.to_sym] = [] if errors[attribute.to_sym].nil?

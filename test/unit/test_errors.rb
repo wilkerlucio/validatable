@@ -60,5 +60,11 @@ Expectations do
     errors.add(:attribute1, "message1")
     errors.add(:attribute2, "message2")
     errors.count
-  end   
+  end
+  
+  expect "message" do
+    errors = Validatable::Errors.new
+    errors.add(:attribute, "message")
+    errors[:attribute]
+  end
 end
