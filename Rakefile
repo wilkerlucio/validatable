@@ -4,14 +4,15 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "validatable"
+    gem.name = "durran-validatable"
     gem.summary = %Q{Validatable is a library for adding validations.}
-    gem.email = "nunemaker@gmail.com"
-    gem.homepage = "http://github.com/jnunemaker/validatable"
-    gem.authors = ['Jay Fields', 'John Nunemaker']
+    gem.email = "durran@gmail.com"
+    gem.homepage = "http://github.com/durran/validatable"
+    gem.authors = ['Jay Fields', 'John Nunemaker', 'Durran Jordan']
     gem.files = FileList['lib/**/*.rb', '[A-Z]*', 'test/**/*'].to_a
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
+  Jeweler::GemcutterTasks.new
 rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
 end
