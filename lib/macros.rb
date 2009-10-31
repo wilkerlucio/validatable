@@ -232,7 +232,7 @@ module Validatable
     #     * message - The message to add to the errors collection when the validation fails
     #     * if - A block that when executed must return true of the validation will not occur
     def validates_uniqueness_of(*args)
-      add_validations(args, ValidatesAssociated)
+      add_validations(args, ValidatesUniquenessOf)
     end
 
     # call-seq: validates_inclusion_of(*args)
@@ -250,7 +250,7 @@ module Validatable
     #     * message - The message to add to the errors collection when the validation fails
     #     * if - A block that when executed must return true of the validation will not occur
     def validates_inclusion_of(*args)
-      add_validations(args, ValidatesAssociated)
+      add_validations(args, ValidatesInclusionOf)
     end
 
     # call-seq: validates_exclusion_of(*args)
@@ -268,7 +268,7 @@ module Validatable
     #     * message - The message to add to the errors collection when the validation fails
     #     * if - A block that when executed must return true of the validation will not occur
     def validates_exclusion_of(*args)
-      add_validations(args, ValidatesAssociated)
+      add_validations(args, ValidatesExclusionOf)
     end
 
     # call-seq: include_validations_from(attribute)
