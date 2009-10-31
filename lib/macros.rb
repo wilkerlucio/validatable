@@ -217,6 +217,60 @@ module Validatable
       add_validations(args, ValidatesAssociated)
     end
 
+    # call-seq: validates_uniqueness_of(*args)
+    #
+    # Checks that the field is unique against existing documents in the database.
+    #
+    #   class Person
+    #     include Validatable
+    #     attr_accessor :name
+    #     validates_uniqueness_of :name
+    #   end
+    #
+    # Configuration options:
+    #
+    #     * message - The message to add to the errors collection when the validation fails
+    #     * if - A block that when executed must return true of the validation will not occur
+    def validates_uniqueness_of(*args)
+      add_validations(args, ValidatesAssociated)
+    end
+
+    # call-seq: validates_inclusion_of(*args)
+    #
+    # Checks that the field is included in the supplied list.
+    #
+    #   class Person
+    #     include Validatable
+    #     attr_accessor :name
+    #     validates_inclusion_of :name, :within => ["value"]
+    #   end
+    #
+    # Configuration options:
+    #
+    #     * message - The message to add to the errors collection when the validation fails
+    #     * if - A block that when executed must return true of the validation will not occur
+    def validates_inclusion_of(*args)
+      add_validations(args, ValidatesAssociated)
+    end
+
+    # call-seq: validates_exclusion_of(*args)
+    #
+    # Checks that the field is excluded from the supplied list.
+    #
+    #   class Person
+    #     include Validatable
+    #     attr_accessor :name
+    #     validates_exclusion_of :name, :within => ["value"]
+    #   end
+    #
+    # Configuration options:
+    #
+    #     * message - The message to add to the errors collection when the validation fails
+    #     * if - A block that when executed must return true of the validation will not occur
+    def validates_exclusion_of(*args)
+      add_validations(args, ValidatesAssociated)
+    end
+
     # call-seq: include_validations_from(attribute)
     # 
     # Includes all the validations that are defined on the attribute.
