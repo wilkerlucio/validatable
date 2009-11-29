@@ -10,7 +10,7 @@ module Functional
       end
       instance = klass.new
       instance.valid?
-      assert_equal "can't be empty", instance.errors.on(:name)
+      assert_equal "can't be blank", instance.errors.on(:name)
     end
   end
 end
