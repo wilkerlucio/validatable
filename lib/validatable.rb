@@ -1,6 +1,6 @@
 require 'forwardable'
 require 'rubygems'
-require 'activesupport'
+require 'active_support'
 
 dir = File.expand_path(File.dirname(__FILE__))
 
