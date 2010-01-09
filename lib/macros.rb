@@ -353,7 +353,7 @@ module Validatable
     #     attr_accessor :name
     #   end
     # 
-    def before_validation(&block)
+    def before_validate(&block)
       before_validations << block
     end
   end

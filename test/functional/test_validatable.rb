@@ -9,7 +9,7 @@ functional_tests do
     end
     klass = Class.new do
       include Validatable
-      include_validations_from :child 
+      include_validations_from :child
       define_method :child do
         child_class
       end
@@ -19,7 +19,7 @@ functional_tests do
     instance.valid?
     instance.errors.on(:name)
   end
-  
+
   expect "can't be blank" do
     child_class = Module.new do
       include Validatable
@@ -28,7 +28,7 @@ functional_tests do
     klass = Class.new do
       include Validatable
       validates_presence_of :address
-      include_validations_from :child 
+      include_validations_from :child
       define_method :child do
         child_class
       end
@@ -38,21 +38,21 @@ functional_tests do
     instance.valid?
     instance.errors.on(:address)
   end
-  
+
   expect :is_set do
     klass = Class.new do
       include Validatable
       attr_accessor :result
-      before_validation do
+      before_validate do
         self.result = :is_set
       end
     end
-    
+
     instance = klass.new
     instance.valid?
     instance.result
   end
-  
+
   expect :is_set do
     klass = Class.new do
       include Validatable
@@ -77,7 +77,7 @@ functional_tests do
     end
     subsubclass.new.valid?
   end
-  
+
   expect false do
     klass = Class.new do
       include Validatable
@@ -88,7 +88,7 @@ functional_tests do
     end
     subclass.new.valid?
   end
-  
+
   expect true do
     klass = Class.new do
       include Validatable
@@ -129,7 +129,7 @@ functional_tests do
     end
     klass = Class.new do
       include Validatable
-      include_errors_from :child 
+      include_errors_from :child
       define_method :child do
         child_class.new
       end
@@ -148,7 +148,7 @@ functional_tests do
     end
     klass = Class.new do
       include Validatable
-      include_errors_from :child 
+      include_errors_from :child
       define_method :child do
         child_class.new
       end
@@ -171,7 +171,7 @@ functional_tests do
       extend Forwardable
       def_delegator :child, :name
       validates_true_for :name, :logic => lambda { false }, :level => 2, :message => "invalid message"
-      include_errors_from :child 
+      include_errors_from :child
       define_method :child do
         @child ||= child_class.new
       end
@@ -191,7 +191,7 @@ functional_tests do
     klass = Class.new do
       include Validatable
       validates_true_for :address, :logic => lambda { false }, :level => 1, :message => "invalid message"
-      include_errors_from :child 
+      include_errors_from :child
       define_method :child do
         @child ||= child_class.new
       end
@@ -255,13 +255,13 @@ functional_tests do
     instance = klass.new
     instance.valid?
   end
-  
+
   test ':if with symbol should work' do
     klass = Class.new do
       include Validatable
       attr_accessor :name, :name_required
       validates_presence_of :name, :if => :name_required?
-      
+
       def name_required?
         name_required
       end
@@ -273,13 +273,13 @@ functional_tests do
     assert !instance.valid?
     assert_equal "can't be blank", instance.errors.on(:name)
   end
-  
+
   test ':if with string should work' do
     klass = Class.new do
       include Validatable
       attr_accessor :name, :name_required
       validates_presence_of :name, :if => 'name_required?'
-      
+
       def name_required?
         name_required
       end
@@ -430,7 +430,7 @@ functional_tests do
     instance.valid?
     instance.errors.on(:address)
   end
-  
+
   expect "Mod::Klass/Validatable::ValidatesPresenceOf/name" do
     module Mod
       class Klass
@@ -448,7 +448,7 @@ functional_tests do
     end
     klass.validations.first.key
   end
-  
+
   expect "can't be blank" do
     klass = Class.new do
       include Validatable
@@ -470,13 +470,13 @@ functional_tests do
     instance.validate_only("presence_of/name")
     instance.errors.on(:address)
   end
-  
+
   test 'validate callback' do
     klass = Class.new do
       include Validatable
       attr_accessor :action
       validate :action_presence
-      
+
       private
         def action_presence
           errors.add(:action, 'is invalid') if action.blank?
@@ -485,22 +485,22 @@ functional_tests do
     instance = klass.new
     instance.valid?
     assert_equal 'is invalid', instance.errors.on(:action)
-    
+
     instance.action = 'walk'
     instance.valid?
     assert_nil instance.errors.on(:action)
   end
-  
+
   test 'validate on create callback for new record' do
     klass = Class.new do
       include Validatable
       attr_accessor :action
       validate_on_create :action_presence
-      
+
       def new?
         true
       end
-      
+
       private
         def action_presence
           errors.add(:action, 'is invalid') if action.blank?
@@ -509,7 +509,7 @@ functional_tests do
     instance = klass.new
     instance.valid?
     assert_equal 'is invalid', instance.errors.on(:action)
-    
+
     instance.action = 'walk'
     instance.valid?
     assert_nil instance.errors.on(:action)
@@ -520,11 +520,11 @@ functional_tests do
       include Validatable
       attr_accessor :action
       validate_on_create :action_presence
-      
+
       def new?
         false
       end
-      
+
       private
         def action_presence
           errors.add(:action, 'is invalid') if action.blank?
@@ -533,7 +533,7 @@ functional_tests do
     instance = klass.new
     instance.valid?
     assert_nil instance.errors.on(:action)
-    
+
     instance.action = 'walk'
     instance.valid?
     assert_nil instance.errors.on(:action)
@@ -544,11 +544,11 @@ functional_tests do
       include Validatable
       attr_accessor :action
       validate_on_update :action_presence
-      
+
       def new?
         true
       end
-      
+
       private
         def action_presence
           errors.add(:action, 'is invalid') if action.blank?
@@ -557,7 +557,7 @@ functional_tests do
     instance = klass.new
     instance.valid?
     assert_nil instance.errors.on(:action)
-    
+
     instance.action = 'walk'
     instance.valid?
     assert_nil instance.errors.on(:action)
@@ -568,11 +568,11 @@ functional_tests do
       include Validatable
       attr_accessor :action
       validate_on_update :action_presence
-      
+
       def new?
         false
       end
-      
+
       private
         def action_presence
           errors.add(:action, 'is invalid') if action.blank?
@@ -581,7 +581,7 @@ functional_tests do
     instance = klass.new
     instance.valid?
     assert_equal 'is invalid', instance.errors.on(:action)
-    
+
     instance.action = 'walk'
     instance.valid?
     assert_nil instance.errors.on(:action)

@@ -4,42 +4,43 @@ module Validatable
     klass.extend Validatable::Macros
     klass.class_eval do
       include ActiveSupport::Callbacks
-      define_callbacks :validate, :validate_on_create, :validate_on_update
+      define_callbacks :validate, :validate_on_create, :validate_on_update, :before_validation, :after_validation
     end
   end
-  
+
   # call-seq: valid?
   #
   # Returns true if no errors were added otherwise false. Only executes validations that have no :groups option specified
   def valid?
     valid_for_group?(nil)
   end
-  
+
   # call-seq: errors
   #
   # Returns the Errors object that holds all information about attribute error messages.
   def errors
     @errors ||= Validatable::Errors.new
   end
-  
+
   def valid_for_group?(group) #:nodoc:
     run_before_validations
     errors.clear
     run_callbacks(:validate)
-    
+
     if respond_to?(:new?)
       new? ? run_callbacks(:validate_on_create) : run_callbacks(:validate_on_update)
     end
-    
+
     self.class.validate_children(self, group)
     self.validate_group(group)
+    run_callbacks(:after_validation)
     errors.empty?
   end
-  
+
   def times_validated(key) #:nodoc:
     times_validated_hash[key] || 0
   end
-  
+
   def increment_times_validated_for(validation) #:nodoc:
     if validation.key != nil
       if times_validated_hash[validation.key].nil?
@@ -86,30 +87,30 @@ module Validatable
     increment_times_validated_for(validation)
     validation.run_after_validate(validation_result, self, validation.attribute)
   end
-  
+
   def run_before_validations #:nodoc:
     self.class.all_before_validations.each do |block|
       instance_eval &block
     end
   end
-  
+
   def add_error(attribute, message) #:nodoc:
     self.class.add_error(self, attribute, message)
   end
-  
+
   def validations_for_level_and_group(level, group) #:nodoc:
     validations_for_level = self.all_validations.select { |validation| validation.level == level }
     return validations_for_level.select { |validation| validation.groups.empty? } if group.nil?
     validations_for_level.select { |validation| validation.groups.include?(group) }
   end
-  
+
   def all_validations #:nodoc:
     res = self.class.validations_to_include.inject(self.class.all_validations) do |result, included_validation_class|
       result += self.send(included_validation_class.attribute).all_validations
       result
     end
   end
-  
+
   def validation_levels #:nodoc:
     self.class.all_validations.inject([1]) { |result, validation| result << validation.level }.uniq.sort
   end
