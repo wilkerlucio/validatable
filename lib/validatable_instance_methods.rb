@@ -4,7 +4,7 @@ module Validatable
     klass.extend Validatable::Macros
     klass.class_eval do
       include ActiveSupport::Callbacks
-      define_callbacks :validate, :validate_on_create, :validate_on_update, :before_validation, :after_validation
+      define_callbacks :before_validation, :after_validation
     end
   end
 
@@ -25,12 +25,7 @@ module Validatable
   def valid_for_group?(group) #:nodoc:
     run_before_validations
     errors.clear
-    run_callbacks(:validate)
-
-    if respond_to?(:new?)
-      new? ? run_callbacks(:validate_on_create) : run_callbacks(:validate_on_update)
-    end
-
+    run_callbacks(:before_validation)
     self.class.validate_children(self, group)
     self.validate_group(group)
     run_callbacks(:after_validation)

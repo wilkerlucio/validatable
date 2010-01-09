@@ -475,7 +475,7 @@ functional_tests do
     klass = Class.new do
       include Validatable
       attr_accessor :action
-      validate :action_presence
+      before_validation :action_presence
 
       private
         def action_presence
@@ -491,99 +491,4 @@ functional_tests do
     assert_nil instance.errors.on(:action)
   end
 
-  test 'validate on create callback for new record' do
-    klass = Class.new do
-      include Validatable
-      attr_accessor :action
-      validate_on_create :action_presence
-
-      def new?
-        true
-      end
-
-      private
-        def action_presence
-          errors.add(:action, 'is invalid') if action.blank?
-        end
-    end
-    instance = klass.new
-    instance.valid?
-    assert_equal 'is invalid', instance.errors.on(:action)
-
-    instance.action = 'walk'
-    instance.valid?
-    assert_nil instance.errors.on(:action)
-  end
-
-  test 'validate on create callback for not new record' do
-    klass = Class.new do
-      include Validatable
-      attr_accessor :action
-      validate_on_create :action_presence
-
-      def new?
-        false
-      end
-
-      private
-        def action_presence
-          errors.add(:action, 'is invalid') if action.blank?
-        end
-    end
-    instance = klass.new
-    instance.valid?
-    assert_nil instance.errors.on(:action)
-
-    instance.action = 'walk'
-    instance.valid?
-    assert_nil instance.errors.on(:action)
-  end
-
-  test 'validate on update callback for new record' do
-    klass = Class.new do
-      include Validatable
-      attr_accessor :action
-      validate_on_update :action_presence
-
-      def new?
-        true
-      end
-
-      private
-        def action_presence
-          errors.add(:action, 'is invalid') if action.blank?
-        end
-    end
-    instance = klass.new
-    instance.valid?
-    assert_nil instance.errors.on(:action)
-
-    instance.action = 'walk'
-    instance.valid?
-    assert_nil instance.errors.on(:action)
-  end
-
-  test 'validate on update callback for not new record' do
-    klass = Class.new do
-      include Validatable
-      attr_accessor :action
-      validate_on_update :action_presence
-
-      def new?
-        false
-      end
-
-      private
-        def action_presence
-          errors.add(:action, 'is invalid') if action.blank?
-        end
-    end
-    instance = klass.new
-    instance.valid?
-    assert_equal 'is invalid', instance.errors.on(:action)
-
-    instance.action = 'walk'
-    instance.valid?
-    assert_nil instance.errors.on(:action)
-  end
 end
