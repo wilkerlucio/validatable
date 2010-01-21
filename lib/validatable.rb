@@ -1,8 +1,5 @@
 require 'forwardable'
 require 'rubygems'
-
-gem "activesupport", ">= 2.2.2", "< 3.0.pre"
-
 require 'active_support'
 
 dir = File.expand_path(File.dirname(__FILE__))

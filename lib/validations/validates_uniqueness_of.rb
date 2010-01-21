@@ -8,7 +8,7 @@ module Validatable
         conditions.merge!(scope => instance.send(scope))
       end
       doc = instance.class.first(:conditions => conditions)
-      doc.nil?
+      doc.nil? || instance.id == doc.id
     end
 
     def message(instance)
