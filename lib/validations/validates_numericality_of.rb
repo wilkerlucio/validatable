@@ -13,7 +13,7 @@ module Validatable
     end
     
     def message(instance)
-      super || "must be a number"
+      super || i18n_message(instance, :not_a_number) || "must be a number"
     end
     
     private

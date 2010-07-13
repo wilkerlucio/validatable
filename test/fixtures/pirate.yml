@@ -1,0 +1,22 @@
+pirate:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: "Tu position!"
+          blank: "Preenche!"
+        model1:
+          attributes:
+            name:
+              blank: "model name required"
+      messages:
+        accepted: "agree!"
+        blank: "say something!"
+        confirmation: "is not what I want!"
+        exclusion: "is out of cogitation!"
+        inclusion: "choose one that I want!"
+        invalid: "is not aceptable!"
+        not_a_number: "just numbers!"
+        taken: "is not available for you!"

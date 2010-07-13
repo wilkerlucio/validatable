@@ -8,7 +8,7 @@ module Validatable
     end
     
     def message(instance)
-      super || "is invalid"
+      super || i18n_message(instance, :invalid) || "is invalid"
     end
   end
 end

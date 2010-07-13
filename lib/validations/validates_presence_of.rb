@@ -10,7 +10,7 @@ module Validatable
     end
 
     def message(instance)
-      super || "can't be blank"
+      super || i18n_message(instance, :blank) || "can't be blank"
     end
   end
 end

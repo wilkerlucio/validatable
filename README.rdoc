@@ -114,5 +114,11 @@ In the above example the attribute "name" is appended to the message.
 
 See the tests for more examples
 
+== i18n support
+
+The i18n support work as ActiveRecord validations i18n, you can check a good doc at Rails Guides: http://guides.rubyonrails.org/i18n.html#translations-for-active-record-models
+
+Currently it isn't supporting all ActiveRecord translations, you can check possible values at pirate language sample in tests.
+
 == Contributors
 Rick Bradley, Anonymous Z, Jason Miller, Ali Aghareza, Xavier Shay, Dan Manges, Karthik Krishnan and Venkat, Clint Bishop, Chris Didyk, Yi Wen

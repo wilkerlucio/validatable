@@ -10,7 +10,7 @@ module Validatable
     end
 
     def message(instance)
-      super || "is excluded"
+      super || i18n_message(instance, :exclusion) || "is excluded"
     end
   end
 end

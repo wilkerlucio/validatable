@@ -3,7 +3,7 @@ module Validatable
     option :minimum, :maximum, :is, :within
     
     def message(instance)
-      super || "is invalid"
+      super || i18n_message(instance, :invalid) || "is invalid"
     end
     
     def valid?(instance)

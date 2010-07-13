@@ -8,7 +8,7 @@ begin
     gem.summary = %Q{Validatable is a library for adding validations.}
     gem.email = "durran@gmail.com"
     gem.homepage = "http://github.com/durran/validatable"
-    gem.authors = ['Jay Fields', 'John Nunemaker', 'Durran Jordan']
+    gem.authors = ['Jay Fields', 'John Nunemaker', 'Durran Jordan', 'Wilker Lúcio']
     gem.files = FileList['lib/**/*.rb', '[A-Z]*', 'test/**/*'].to_a
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end

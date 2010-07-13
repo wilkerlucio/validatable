@@ -76,6 +76,10 @@ module Validatable
       @message.respond_to?(:call) ? instance.instance_eval(&@message) : @message
     end
     
+    def i18n_message(instance, label_name)
+      ::Validatable::I18n.translate(instance.class.name.underscore, attribute, label_name)
+    end
+    
     def validate_this_time?(instance)
       return true if @times.nil?
       self.times > instance.times_validated(self.key)

@@ -12,7 +12,7 @@ module Validatable
     end
 
     def message(instance)
-      super || "must be unique"
+      super || i18n_message(instance, :taken) || "must be unique"
     end
   end
 end

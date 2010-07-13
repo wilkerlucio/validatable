@@ -8,7 +8,7 @@ module Validatable
     end
     
     def message(instance)
-      super || "must be accepted"
+      super || i18n_message(instance, :accepted) || "must be accepted"
     end
   end
 end

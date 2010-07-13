@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.version = "2.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Jay Fields", "John Nunemaker", "Durran Jordan"]
-  s.date = %q{2010-01-10}
+  s.authors = ["Jay Fields", "John Nunemaker", "Durran Jordan", "Wilker L\303\272cio"]
+  s.date = %q{2010-07-13}
   s.email = %q{durran@gmail.com}
   s.extra_rdoc_files = [
     "README.rdoc"
@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
      "lib/requireable.rb",
      "lib/understandable.rb",
      "lib/validatable.rb",
+     "lib/validatable/i18n.rb",
      "lib/validatable_class_methods.rb",
      "lib/validatable_instance_methods.rb",
      "lib/validations/validates_acceptance_of.rb",
@@ -42,6 +43,9 @@ Gem::Specification.new do |s|
      "lib/validations/validates_uniqueness_of.rb",
      "lib/validations/validation_base.rb",
      "test/all_tests.rb",
+     "test/fixtures/classes.rb",
+     "test/fixtures/pirate.yml",
+     "test/functional/test_i18n.rb",
      "test/functional/test_validatable.rb",
      "test/functional/test_validates_acceptance_of.rb",
      "test/functional/test_validates_associated.rb",
@@ -54,6 +58,7 @@ Gem::Specification.new do |s|
      "test/functional/test_validates_true_for.rb",
      "test/test_helper.rb",
      "test/unit/test_errors.rb",
+     "test/unit/test_i18n.rb",
      "test/unit/test_understandable.rb",
      "test/unit/test_validatable.rb",
      "test/unit/test_validates_acceptance_of.rb",
@@ -72,10 +77,12 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/durran/validatable}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.5}
+  s.rubygems_version = %q{1.3.7}
   s.summary = %q{Validatable is a library for adding validations.}
   s.test_files = [
     "test/all_tests.rb",
+     "test/fixtures/classes.rb",
+     "test/functional/test_i18n.rb",
      "test/functional/test_validatable.rb",
      "test/functional/test_validates_acceptance_of.rb",
      "test/functional/test_validates_associated.rb",
@@ -88,6 +95,7 @@ Gem::Specification.new do |s|
      "test/functional/test_validates_true_for.rb",
      "test/test_helper.rb",
      "test/unit/test_errors.rb",
+     "test/unit/test_i18n.rb",
      "test/unit/test_understandable.rb",
      "test/unit/test_validatable.rb",
      "test/unit/test_validates_acceptance_of.rb",
@@ -108,7 +116,7 @@ Gem::Specification.new do |s|
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
     else
     end
   else

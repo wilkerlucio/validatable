@@ -4,8 +4,10 @@ require 'mocha'
 require 'dust'
 require 'set'
 require 'expectations'
+require 'activesupport'
 
 require File.dirname(__FILE__) + '/../lib/validatable'
+require File.dirname(__FILE__) + '/fixtures/classes'
 
 class << Test::Unit::TestCase
   def expect(expected_value, &block)
@@ -19,6 +21,11 @@ class << Test::Unit::TestCase
     end 
   end
 end
+
+::I18n.load_path << File.expand_path(File.join(File.dirname(__FILE__), %w[ fixtures pirate.yml ]))
+::I18n.default_locale = :pirate
+
+Validatable::I18n.disable
 
 class Test::Unit::TestCase
   def assert_array_equal a, b

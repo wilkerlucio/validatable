@@ -17,7 +17,7 @@ module Validatable
     end
     
     def message(instance)
-      super || "doesn't match confirmation"
+      super || i18n_message(instance, :confirmation) || "doesn't match confirmation"
     end
   end
 end
