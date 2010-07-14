@@ -9,8 +9,6 @@ module Validatable
     ]
     
     class << self
-      @enabled = true
-      
       def build_defaults(model_name, attribute_name, label_name)
         PATHS.map do |scope|
           path = scope.dup
@@ -53,3 +51,5 @@ module Validatable
     end
   end
 end
+
+Validatable::I18n.enable
